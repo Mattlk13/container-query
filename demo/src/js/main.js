@@ -1,13 +1,15 @@
-import Container from '../../../Container';
+import Container from '@zeecoder/container-query/Container';
 
-const userJSON = require('../css/components/user/user.json');
+function initialiseContainer (jsonData) {
+    let htmlElements = document.querySelectorAll(jsonData.selector);
+    htmlElements.forEach((htmlElement) => {
+        const containerInstance = new Container(htmlElement, jsonData);
+        window.addEventListener('resize', containerInstance.adjust);
+    });
+}
 
-const userContainer = new Container(
-    document.getElementById('user'),
-    userJSON
-);
-
-window.addEventListener('resize', userContainer.adjust);
+initialiseContainer(require('../css/components/user/user.json'));
+initialiseContainer(require('../css/components/social-link/social-link.json'));
 
 
 // import initialiseAllContainers from '../initialiseAllContainers';
